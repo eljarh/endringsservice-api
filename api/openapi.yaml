@@ -1,0 +1,80 @@
+openapi: 3.0.3
+info:
+  contact:
+    email: no-spam@mattilsynet.no
+    name: Team Produksjonsdyr
+  description: Dette er et api som har i ansvar å ta i mot endringer fra diverse kilder
+    som mener noe om produksjonsplasser
+  title: Endringsservice
+  version: 1.0.0
+servers:
+- url: https://raw.githubusercontent.com/eljarh/api-spec/main/https
+paths:
+  /produksjonsplass:
+    post:
+      description: ""
+      operationId: postProduksjonsplass
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Produksjonsplass'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Produksjonsplass'
+          description: Vellykket lagring av endring
+        "400":
+          description: Ugyldig endringId gitt
+        "405":
+          description: Validering misslykkes
+      summary: les inn en produksjonsplass
+      tags:
+      - produksjonsplass
+components:
+  schemas:
+    Produksjonsplass:
+      example:
+        identifikasjonstypekode: "1"
+        geomMaster: mats
+        geomKilde: matrikkel
+        identifikasjonsnummer: "123123"
+        koordinatsystem: "25833"
+        point: POINT (212636.798843267 6645426.47667482)
+      properties:
+        identifikasjonsnummer:
+          description: "en identifikasjon som du bruker for å finne fram denne enheten/identiteten\
+            \ i ditt system, også kalt identifikasjonsnummer i andre systemer"
+          example: "123123"
+          type: string
+        identifikasjonstypekode:
+          description: "for å kunne støtte flere kilder må man kunne gjennbruke informasjonsnummer\
+            \ for hver kilde, også kalt identifikasjontypeKode i andre systemer"
+          example: "1"
+          type: string
+        point:
+          description: string representasjon av SDO_UTIL.TO_WKTGEOMETRY
+          example: POINT (212636.798843267 6645426.47667482)
+          type: string
+        koordinatsystem:
+          description: "koordinatsystem som skal brukes for å representere point,\
+            \ mest typisk er 25833"
+          example: "25833"
+          type: string
+        geomMaster:
+          description: "hvor dataene fra, ikke hvor kilden er, men f.eks mats selvom\
+            \ kilden er matrikkel"
+          example: mats
+          type: string
+        geomKilde:
+          description: "hvor kommer dataene opprinnelig fra, i.e., matrikkel, slf,\
+            \ brreg, osv"
+          example: matrikkel
+          type: string
+      required:
+      - identifikasjonsnummer
+      - identifikasjonstypekode
+      type: object

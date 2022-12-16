@@ -1,0 +1,17 @@
+.gitignore
+.openapi-generator-ignore
+.travis.yml
+README.md
+api/openapi.yaml
+api_produksjonsplass.go
+client.go
+configuration.go
+docs/Produksjonsplass.md
+docs/ProduksjonsplassApi.md
+git_push.sh
+go.mod
+go.sum
+model_produksjonsplass.go
+response.go
+test/api_produksjonsplass_test.go
+utils.go
