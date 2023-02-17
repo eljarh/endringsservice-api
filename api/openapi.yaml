@@ -7,8 +7,6 @@ info:
     som mener noe om produksjonsplasser
   title: Endringsservice
   version: 1.0.0
-servers:
-- url: https://raw.githubusercontent.com/eljarh/api-spec/main/https
 paths:
   /produksjonsplass:
     post:
